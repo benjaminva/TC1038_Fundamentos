@@ -1,3 +1,3 @@
 # README #
 
-Pensamiento Computacional para Ingeniería, ITESM Campus Querétaro, México por Benjamín Valdés.
+TC1038 Fundamentos de Programación, ITESM Campus Querétaro, México por Benjamín Valdés.
