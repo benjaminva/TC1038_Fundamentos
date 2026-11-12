@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+
+    <meta name="author" content="Eduardo Juárez">
+
+    <meta name="author" content="Benjamín Valdés">
+
+    <meta name="author" content="Becari@ Anónimo">
+    <title>Práctica: Rutas y navegación de carpetas.</title>
+
+    <style>
+        pre.codigo {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1e88e5;
+            padding: 12px 16px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+        code.inline {
+            background-color: #eeeeee;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="blue darken-1 nav-wrapper">
+                    <a href="index.html" class="brand-logo"><acronym title="Pensamiento Computacional para Ingeniería">Pensamiento Computacional para Ingeniería</acronym></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="container">
+            <div class="section">
+                <h3>Práctica: Rutas y navegación de carpetas.</h3>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="section" id="descripcion">
+                <h5>
+                  <i class="small material-icons">info_outline</i>
+                  Rutas y navegación de carpetas.
+                </h5>
+                <p>Practicarás cómo moverte entre carpetas desde la consola y desde Python, y entenderás la diferencia entre una ruta estática (absoluta) y una ruta dinámica (relativa), para que tus programas funcionen en cualquier computadora.</p>
+            </div>
+            <div class="divider"></div>
+
+            <div class="section" id="modalidad">
+                <h5>
+                  <i class="small material-icons">group</i>
+                  Modalidad
+                 </h5>
+                <p>Individual, en laboratorio (tiempo estimado: 50 minutos).</p>
+            </div>
+            <div class="divider"></div>
+
+            <div class="section" id="objetivos">
+                <h5>
+                <i class="small material-icons">check</i>
+                Objetivos de aprendizaje</h5>
+                <ul class="collection with-header">
+                    <li class="collection-item">Navegar entre carpetas desde la consola con <code class="inline">cd</code> y listar su contenido con <code class="inline">dir</code> o <code class="inline">ls</code>.</li>
+                    <li class="collection-item">Identificar las diferencias de las diagonales (<code class="inline">/</code> vs <code class="inline">\</code>) entre sistemas operativos.</li>
+                    <li class="collection-item">Distinguir rutas estáticas de rutas dinámicas (relativas) y usarlas en programas de Python.</li>
+                </ul>
+            </div>
+            <div class="divider"></div>
+
+            <div class="section" id="instrucciones">
+                <h5>
+                  <i class="small material-icons">list</i>
+                  Instrucciones</h5>
+                <ul class="collection">
+
+                    <li class="collection-item">
+                    <h5>Parte 1: La consola</h5>
+                    Abre una terminal (CMD o PowerShell en Windows; Terminal en macOS o Linux) y resuelve lo siguiente.
+                    </li>
+
+                    <li class="collection-item">
+                    <b>1. Cambiar de carpeta con <code class="inline">cd</code>.</b>
+                    Ubícate en tu carpeta de documentos, entra a una subcarpeta y regresa un nivel con <code class="inline">cd ..</code>.
+<pre class="codigo">cd Documents
+cd proyecto
+cd ..</pre>
+                    </li>
+
+                    <li class="collection-item">
+                    <b>2. Ver el contenido de una carpeta.</b>
+                    Usa <code class="inline">dir</code> en Windows o <code class="inline">ls</code> en macOS y Linux.
+<pre class="codigo">dir      (Windows)
+ls       (macOS / Linux)</pre>
+                    </li>
+
+                    <li class="collection-item">
+                    <b>3. Las diagonales según el sistema operativo.</b>
+                    Windows separa las carpetas con <code class="inline">\</code> (diagonal invertida); macOS y Linux usan <code class="inline">/</code>.
+                    Escribe en tu cuaderno la ruta de tu carpeta actual y observa qué diagonal aparece.
+                    Python en Windows acepta ambas, pero <code class="inline">\</code> tiene un significado especial dentro de las cadenas
+                    (por ejemplo <code class="inline">"\n"</code> es un salto de línea), por eso en Windows se escribe <code class="inline">r"C:\Users\Name"</code>
+                    (cadena cruda, con la <code class="inline">r</code> al inicio) o se usa <code class="inline">/</code>.
+                    </li>
+
+                    <li class="collection-item">
+                    <b>4. Espacios en los nombres de carpeta.</b>
+                    Intenta entrar a una carpeta llamada <code class="inline">mis documentos</code> sin comillas y observa el error. Luego usa comillas:
+<pre class="codigo">cd mis documentos       (error: la consola cree que son dos argumentos)
+cd "mis documentos"     (correcto)</pre>
+                    </li>
+
+                    <li class="collection-item">
+                    <b>5. Rutas estáticas vs. dinámicas.</b>
+                    Compara estas dos formas de indicar el mismo archivo:
+<pre class="codigo">"c:/mis documentos/proyecto/prog.py"      (ruta estática o absoluta)
+"proyecto/prog.py"                        (ruta dinámica o relativa)</pre>
+                    ¿cuál de las dos funcionaría si copias tu proyecto a la computadora de un compañero? ¿Por qué?
+                    </li>
+
+                    <li class="collection-item">
+                    <h5>Parte 2: Rutas desde Python</h5>
+                    <b>6. Cambiar de carpeta desde un programa.</b>
+                    Ejecuta el siguiente código (cambia la ruta por una que exista en tu computadora) y explica qué imprime en cada paso.
+<pre class="codigo">import os
+
+print("Original:", os.getcwd())
+
+# cd (es necesario usar r"" en Windows)
+os.chdir(r"C:\Users\Name\Documents")
+
+# cd ..
+os.chdir("..")
+
+print("Nueva ubicacion:", os.getcwd())</pre>
+                    </li>
+
+                    <li class="collection-item">
+                    <b>7. Abrir un archivo con ruta relativa.</b>
+                    Crea la carpeta <code class="inline">datos</code> junto a tu programa, guarda dentro un archivo <code class="inline">notas.txt</code>
+                    y escribe un programa que lo muestre en pantalla usando una ruta relativa:
+<pre class="codigo">archivo = open("datos/notas.txt", "r")
+print(archivo.read())
+archivo.close()</pre>
+                    Ahora ejecuta el programa desde otra carpeta (con <code class="inline">cd</code>). ¿Sigue funcionando? ¿Por qué?
+                    </li>
+
+                </ul>
+            </div>
+            <div class="divider"></div>
+
+            <div class="section" id="recursos">
+                <h5><i class="small material-icons">attachment</i>Recursos</h5>
+                <ul><li>
+                  Documentación del módulo <code class="inline">os</code>: <a href="https://docs.python.org/es/3/library/os.html" target="_blank">docs.python.org/es/3/library/os.html</a>
+                </li>
+                <li>
+                  Documentación del módulo <code class="inline">os.path</code>: <a href="https://docs.python.org/es/3/library/os.path.html" target="_blank">docs.python.org/es/3/library/os.path.html</a>
+                </li></ul>
+            </div>
+
+
+        </div>
+    </main>
+
+    <footer class="blue darken-1 page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h5 class="white-text">Secciones</h5>
+                    <ol class="grey-text text-lighten-3">
+                        <li><a class="grey-text text-lighten-3" href="#descripcion">Descripción</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#modalidad">Modalidad</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#objetivos">Objetivos</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#instrucciones">Instrucciones</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#recursos">Recursos</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#entrega">Especificaciones de entrega</a></li>
+                    </ol>
+                </div>
+            </div>
+            <p class="grey-text text-lighten-4">Powered by <a href="http://materializecss.com/" target="_blank" class="white-text text-lighten-4">Materialize</a>.</p>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+               © 2019 Escuela de Ingeniería y Ciencias - Tecnológico de Monterrey.
+            </div>
+        </div>
+    </footer>
+
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+
+</html>
